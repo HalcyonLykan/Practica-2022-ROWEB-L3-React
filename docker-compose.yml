@@ -1,0 +1,38 @@
+version: '3'
+services:
+    nginx:
+        container_name: practica-react-nginx
+        restart: unless-stopped
+        build:
+            context: ./
+            dockerfile: docker/nginx/nginx.dockerfile
+        volumes:
+            - ./:/var/www
+        ports:
+            - "3000:80"
+        depends_on:
+            - react
+        networks:
+            - nginx-proxy
+            - localnet
+
+    react:
+        user: 1000:1000
+        container_name: practica-react-react
+        restart: unless-stopped
+        build:
+            context: ./
+            dockerfile: docker/node/react.dockerfile
+        volumes:
+            - ./:/var/www
+        ports:
+            - "3000"
+        networks:
+            - localnet
+networks:
+    localnet:
+        external: true
+    nginx-proxy:
+        external: true
+    # sail:
+    #     driver: bridge
