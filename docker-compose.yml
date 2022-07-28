@@ -12,9 +12,6 @@ services:
             - "3000:80"
         depends_on:
             - react
-        networks:
-            - nginx-proxy
-            - localnet
 
     react:
         user: 1000:1000
@@ -27,12 +24,3 @@ services:
             - ./:/var/www
         ports:
             - "3000"
-        networks:
-            - localnet
-networks:
-    localnet:
-        external: true
-    nginx-proxy:
-        external: true
-    # sail:
-    #     driver: bridge
