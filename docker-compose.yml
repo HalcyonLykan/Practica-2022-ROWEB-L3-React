@@ -24,3 +24,11 @@ services:
             - ./:/var/www
         ports:
             - "3000"
+
+    dev:
+        image: "node:lts-bullseye"
+        container_name: practica-react-nodejs
+        user: "node"
+        working_dir: /home/node/dev
+        volumes:
+            - ./:/home/node/dev
